@@ -1,6 +1,10 @@
 version: 2
 jobs:
   build:
+    filters:
+      branches:
+        only:
+          - develop
     working_directory: ~/my-app
     docker:
       - image: circleci/ruby:2.6.3-node-browsers
