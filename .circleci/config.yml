@@ -6,16 +6,16 @@ jobs:
         only:
           - develop
     working_directory: ~/my-app
-    docker:
-      - image: circleci/ruby:2.6.3-node-browsers
+    docker: # require you to install everything on one container for testing
+      - image: circleci/ruby:2.6.3-node-browsers # reuse prod container
         environment:
           BUNDLE_RETRY: 3
           BUNDLE_PATH: vendor/bundle
-          DATABASE_URL: postgres://postgres:password@localhost:5432/tech_cast_test
+          DATABASE_URL: postgres://postgres:password@localhost:5432/tech_cast_test # passowrds in environment variables or from rails config
           RAILS_ENV: test
-          REDIS_URL: redis://127.0.0.1:6379
-      - image: circleci/postgres:11-alpine
-      - image: circleci/redis:3.2-alpine
+          REDIS_URL: redis://127.0.0.1:6379 # passowrds in environment variables or from rails config
+      - image: circleci/postgres:11-alpine # remove
+      - image: circleci/redis:3.2-alpine # remove
     steps:
       - checkout
 
@@ -52,15 +52,16 @@ jobs:
       # Run rspec in parallel
       - run:
           command: |
-            mkdir /tmp/test-results
+            mkdir /tmp/test-results # please remove /tmp
             TESTFILES=$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
+            # use Rake 
             bundle exec rspec $TESTFILES --profile 10 --format RspecJunitFormatter --out /tmp/test-results/rspec.xml --format progress
       - store_test_results:
-          path: /tmp/test-results
+          path: /tmp/test-results # please remove /tmp
       - store_artifacts:
-          path: /tmp/test-results
+          path: /tmp/test-results # please remove /tmp
           destination: test-results
 
       # Save artifacts
       - store_test_results:
-          path: /tmp/test-results
+          path: /tmp/test-results # please remove /tmp
