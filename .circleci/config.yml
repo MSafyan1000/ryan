@@ -54,7 +54,7 @@ jobs:
           command: |
             mkdir /tmp/test-results # please remove /tmp
             TESTFILES=$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
-            # use Rake 
+            # use Rake
             bundle exec rspec $TESTFILES --profile 10 --format RspecJunitFormatter --out /tmp/test-results/rspec.xml --format progress
       - store_test_results:
           path: /tmp/test-results # please remove /tmp
@@ -65,3 +65,22 @@ jobs:
       # Save artifacts
       - store_test_results:
           path: /tmp/test-results # please remove /tmp
+      - restore_cache:
+          keys:
+            - yarn-npm-packages-2-{{ checksum "yarn.lock" }}
+            - yarn-npm-packages-2-
+
+      - run:
+          name: install js dependencies
+          command: |
+            cd react-front && yarn install --cache-folder ~/.cache/yarn --production=false
+
+      - save_cache:
+          paths:
+            - ~/.cache/yarn
+          key: yarn-npm-packages-2-{{ checksum "yarn.lock" }}
+
+      - run:
+          name: run js tests
+          command: |
+            cd react-front && yarn test
