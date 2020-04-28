@@ -22,6 +22,7 @@ module.exports = {
       '<rootDir>/internals/mocks/image.js',
   },
   setupFilesAfterEnv: [
+    '<rootDir>/setupTests.js',
     '<rootDir>/internals/testing/test-bundler.js',
     'react-testing-library/cleanup-after-each',
   ],
