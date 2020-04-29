@@ -12,17 +12,18 @@ import { gql } from 'apollo-boost';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 
-export const EXCHANGE_RATES = gql`
+export const QUERY_ORDERS = gql`
   {
-    rates(currency: "USD") {
-      currency
-      rate
+    allOrders {
+      id
+      description
+      total
     }
   }
 `;
 
 export default function HomePage() {
-  const props = useQuery(EXCHANGE_RATES);
+  const props = useQuery(QUERY_ORDERS);
   const { loading, error, data } = props;
 
   if (loading) return <p>Loading...</p>;
@@ -33,11 +34,11 @@ export default function HomePage() {
       <h1>
         <FormattedMessage {...messages.header} />
       </h1>
-      <div data-test="rates">
-        {data.rates.map(({ currency, rate }) => (
-          <div key={currency}>
+      <div data-test="orders">
+        {data.allOrders.map(({ description, total }, i) => (
+          <div key={i}>
             <p>
-              {currency}: {rate}
+              {description}: {total}
             </p>
           </div>
         ))}

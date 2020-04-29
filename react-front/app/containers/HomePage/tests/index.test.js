@@ -2,23 +2,31 @@ import { MockedProvider } from '@apollo/react-testing';
 import { mount } from 'enzyme';
 import React from 'react';
 import { IntlProvider } from 'react-intl';
-import HomePage, { EXCHANGE_RATES } from '../index';
+import HomePage, { QUERY_ORDERS } from '../index';
 import { messages } from '../messages';
 const wait = require('waait');
 
-const rates = [
-  { currency: 'AED', rate: '3.6731' },
-  { currency: 'AFN', rate: '76.149991' },
+const allOrders = [
+  {
+    id: 1,
+    description: 'item-1',
+    total: 100,
+  },
+  {
+    id: 2,
+    description: 'item-2',
+    total: 120,
+  },
 ];
 
 const mocks = [
   {
     request: {
-      query: EXCHANGE_RATES,
+      query: QUERY_ORDERS,
     },
     result: {
       data: {
-        rates,
+        allOrders,
       },
     },
   },
@@ -37,13 +45,13 @@ describe('<HomePage />', () => {
     await wait(0);
     await wrapper.update();
 
-    const ratesContainer = wrapper.find('[data-test="rates"]').text();
+    const ratesContainer = wrapper.find('[data-test="orders"]').text();
 
     expect(wrapper.find('h1').text()).toEqual(messages.header.defaultMessage);
 
-    rates.forEach(element => {
-      expect(ratesContainer).toContain(element.currency);
-      expect(ratesContainer).toContain(element.rate);
+    allOrders.forEach(element => {
+      expect(ratesContainer).toContain(element.description);
+      expect(ratesContainer).toContain(element.total);
     });
   });
 });
