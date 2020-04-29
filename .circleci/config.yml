@@ -52,9 +52,8 @@ jobs:
       # Run rspec in parallel
       - run:
           command: |
-            mkdir /tmp/test-results # please remove /tmp
+            mkdir /tmp/test-results
             TESTFILES=$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
-            # use Rake
             bundle exec rspec $TESTFILES --profile 10 --format RspecJunitFormatter --out /tmp/test-results/rspec.xml --format progress
       - store_test_results:
           path: /tmp/test-results # please remove /tmp
