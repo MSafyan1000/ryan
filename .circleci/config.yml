@@ -62,23 +62,10 @@ jobs:
           path: /tmp/test-results # please remove /tmp
           destination: test-results
 
-      # Save artifacts
-      - store_test_results:
-          path: /tmp/test-results # please remove /tmp
-      - restore_cache:
-          keys:
-            - yarn-npm-packages-2-{{ checksum "yarn.lock" }}
-            - yarn-npm-packages-2-
-
       - run:
           name: install js dependencies
           command: |
             cd react-front && yarn install --cache-folder ~/.cache/yarn --production=false
-
-      - save_cache:
-          paths:
-            - ~/.cache/yarn
-          key: yarn-npm-packages-2-{{ checksum "yarn.lock" }}
 
       - run:
           name: run js tests
