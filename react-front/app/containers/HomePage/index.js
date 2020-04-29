@@ -35,8 +35,8 @@ export default function HomePage() {
         <FormattedMessage {...messages.header} />
       </h1>
       <div data-test="orders">
-        {data.allOrders.map(({ description, total }, i) => (
-          <div key={i}>
+        {data.allOrders.map(({ description, total, id }) => (
+          <div key={id}>
             <p>
               {description}: {total}
             </p>
