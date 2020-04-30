@@ -1,0 +1,18 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  database: rails_circleci_development
+
+test:
+  <<: *default
+  database: rails_circleci_test
+
+production:
+  <<: *default
+  database: rails_circleci_production
+  username: rails_circleci
+  password: <%= ENV['RAILS_CIRCLECI_DATABASE_PASSWORD'] %>
