@@ -7,7 +7,7 @@ jobs:
           - develop
     working_directory: ~/my-app
     docker: # require you to install everything on one container for testing
-      - image: circleci/ruby:2.6.3-node-browsers # reuse prod container
+      - image: circleci/ruby:2.5.1-node-browsers # reuse prod container
         environment:
           BUNDLE_RETRY: 3
           BUNDLE_PATH: vendor/bundle
@@ -64,7 +64,7 @@ jobs:
       - run:
           name: install js dependencies
           command: |
-            cd react-front && yarn install --cache-folder ~/.cache/yarn --production=false
+            cd react-front && yarn install --ignore-engines --cache-folder ~/.cache/yarn --production=false
 
       - run:
           name: run js tests
