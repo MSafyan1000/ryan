@@ -7,7 +7,7 @@ jobs:
           - develop
     working_directory: ~/my-app
     docker: # require you to install everything on one container for testing
-      - image: circleci/ruby:2.6.3-node-browsers # reuse prod container
+      - image: circleci/ruby:2.5.1-node-browsers # reuse prod container
         environment:
           BUNDLE_RETRY: 3
           BUNDLE_PATH: vendor/bundle
@@ -47,14 +47,13 @@ jobs:
 
       - run:
           name: Database setup
-          command: bin/rails db:create db:schema:load --trace
+          command: bin/rails db:create db:migrate db:seed --trace
 
       # Run rspec in parallel
       - run:
           command: |
-            mkdir /tmp/test-results # please remove /tmp
+            mkdir /tmp/test-results
             TESTFILES=$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
-            # use Rake
             bundle exec rspec $TESTFILES --profile 10 --format RspecJunitFormatter --out /tmp/test-results/rspec.xml --format progress
       - store_test_results:
           path: /tmp/test-results # please remove /tmp
@@ -62,23 +61,10 @@ jobs:
           path: /tmp/test-results # please remove /tmp
           destination: test-results
 
-      # Save artifacts
-      - store_test_results:
-          path: /tmp/test-results # please remove /tmp
-      - restore_cache:
-          keys:
-            - yarn-npm-packages-2-{{ checksum "yarn.lock" }}
-            - yarn-npm-packages-2-
-
       - run:
           name: install js dependencies
           command: |
-            cd react-front && yarn install --cache-folder ~/.cache/yarn --production=false
-
-      - save_cache:
-          paths:
-            - ~/.cache/yarn
-          key: yarn-npm-packages-2-{{ checksum "yarn.lock" }}
+            cd react-front && yarn install --ignore-engines --cache-folder ~/.cache/yarn --production=false
 
       - run:
           name: run js tests

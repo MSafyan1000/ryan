@@ -1,0 +1,2 @@
+frontend: PORT=7000 yarn --cwd react-front start
+backend: PORT=3000 bundle exec puma -C config/puma.rb
