@@ -3,21 +3,21 @@ import React from 'react';
 export default function Header() {
   return (
     <header className="navbar navbar-header navbar-header-fixed">
-      <a href id="mainMenuOpen" className="burger-menu">
+      <a href="/" id="mainMenuOpen" className="burger-menu">
         <i data-feather="menu" />
       </a>
       <div className="navbar-brand">
-        <a href="../../index.html" className="df-logo">
+        <a href="/" className="df-logo">
           dash<span>forge</span>
         </a>
       </div>
       {/* navbar-brand */}
       <div id="navbarMenu" className="navbar-menu-wrapper">
         <div className="navbar-menu-header">
-          <a href="../../index.html" className="df-logo">
+          <a href="/" className="df-logo">
             dash<span>forge</span>
           </a>
-          <a id="mainMenuClose" href>
+          <a id="mainMenuClose" href="/">
             <i data-feather="x" />
           </a>
         </div>

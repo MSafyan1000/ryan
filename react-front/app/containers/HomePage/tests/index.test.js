@@ -47,11 +47,27 @@ describe('<HomePage />', () => {
 
     const ratesContainer = wrapper.find('[data-test="orders"]').text();
 
-    expect(wrapper.find('h1').text()).toEqual(messages.header.defaultMessage);
+    expect(wrapper.find('[data-test="title"]').text()).toEqual(
+      messages.header.defaultMessage,
+    );
 
     allOrders.forEach(element => {
       expect(ratesContainer).toContain(element.description);
       expect(ratesContainer).toContain(element.total);
     });
+  });
+
+  it('should render error', async () => {
+    const wrapper = mount(
+      <MockedProvider mocks={[]} addTypename={false}>
+        <IntlProvider locale="en">
+          <HomePage />
+        </IntlProvider>
+      </MockedProvider>,
+    );
+
+    await wait(0);
+    await wrapper.update();
+    expect(wrapper.find('HomePage').text()).toContain('Error');
   });
 });

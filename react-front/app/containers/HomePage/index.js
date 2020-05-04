@@ -31,7 +31,6 @@ export default function HomePage() {
 
   return (
     <>
-      {' '}
       <div className="content content-fixed bd-b">
         <div className="container pd-x-0 pd-lg-x-10 pd-xl-x-0">
           <div className="d-sm-flex align-items-center justify-content-between">
@@ -39,17 +38,19 @@ export default function HomePage() {
               <nav aria-label="breadcrumb">
                 <ol className="breadcrumb breadcrumb-style1 mg-b-10">
                   <li className="breadcrumb-item">
-                    <a href="#">Profile</a>
+                    <a href="/">Profile</a>
                   </li>
                   <li className="breadcrumb-item">
-                    <a href="#">Discover</a>
+                    <a href="/">Discover</a>
                   </li>
                   <li className="breadcrumb-item active" aria-current="page">
                     Groups
                   </li>
                 </ol>
               </nav>
-              <h4 className="mg-b-0">Discover Groups</h4>
+              <h4 className="mg-b-0" data-test="title">
+                <FormattedMessage {...messages.header} />
+              </h4>
             </div>
             <div className="search-form mg-t-20 mg-sm-t-0">
               <input
@@ -67,23 +68,22 @@ export default function HomePage() {
       <div className="content">
         <div className="container pd-x-0 pd-lg-x-10 pd-xl-x-0">
           <div className="row">
-            <div className="col-lg-9">
+            <div className="col-lg-9" data-test="orders">
               <div className="row row-xs mg-b-25">
                 {/* col */}
                 <div className="col-sm-6 col-md-4 mg-t-10">
                   <ul className="list-group">
-                    <li className="list-group-item d-flex justify-content-between align-items-center">
-                      Cras justo odio
-                      <span className="badge badge-primary badge-pill">14</span>
-                    </li>
-                    <li className="list-group-item d-flex justify-content-between align-items-center">
-                      Dapibus ac facilisis in
-                      <span className="badge badge-primary badge-pill">2</span>
-                    </li>
-                    <li className="list-group-item d-flex justify-content-between align-items-center">
-                      Morbi leo risus
-                      <span className="badge badge-primary badge-pill">1</span>
-                    </li>
+                    {data.allOrders.map(({ description, total, id }) => (
+                      <li
+                        className="list-group-item d-flex justify-content-between align-items-center"
+                        key={id}
+                      >
+                        {description}: {total}
+                        <span className="badge badge-primary badge-pill">
+                          14
+                        </span>
+                      </li>
+                    ))}
                   </ul>
                 </div>
                 {/* col */}
@@ -108,23 +108,6 @@ export default function HomePage() {
         {/* container */}
       </div>
     </>
-  );
-
-  return (
-    <div>
-      <h1>
-        <FormattedMessage {...messages.header} />
-      </h1>
-      <div data-test="orders">
-        {data.allOrders.map(({ description, total, id }) => (
-          <div key={id}>
-            <p>
-              {description}: {total}
-            </p>
-          </div>
-        ))}
-      </div>
-    </div>
   );
 }
 
