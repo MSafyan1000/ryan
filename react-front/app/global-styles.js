@@ -1,5 +1,10 @@
 import { createGlobalStyle } from 'styled-components';
 
+require('dashforge/lib/@fortawesome/fontawesome-free/css/all.min.css');
+require('dashforge/lib/ionicons/css/ionicons.min.css');
+require('dashforge/assets/css/dashforge.min.css');
+require('dashforge/assets/css/dashforge.profile.css');
+
 const GlobalStyle = createGlobalStyle`
   html,
   body {
@@ -16,7 +21,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   #app {
-    background-color: #fafafa;
+    background-color: #fff;
     min-height: 100%;
     min-width: 100%;
   }
