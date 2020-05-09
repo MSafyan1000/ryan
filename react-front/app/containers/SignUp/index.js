@@ -5,33 +5,11 @@
  *
  */
 
-import PropTypes from 'prop-types';
-import React from 'react';
-import { useQuery } from '@apollo/react-hooks';
-import { gql } from 'apollo-boost';
-import { FormattedMessage } from 'react-intl';
-import messages from './messages';
 import Header from 'components/Header';
-
+import React from 'react';
 import '../../../THEME/main/assets/css/dashforge.auth.css';
 
-export const QUERY_ORDERS = gql`
-  {
-    allOrders {
-      id
-      description
-      total
-    }
-  }
-`;
-
 export default function HomePage() {
-  // const props = useQuery(QUERY_ORDERS);
-  // const { loading, error, data } = props;
-
-  // if (loading) return <p>Loading...</p>;
-  // if (error) return <p>Error :(</p>;
-
   return (
     <>
       <div>
@@ -44,7 +22,7 @@ export default function HomePage() {
                 <div className="pd-t-20 wd-100p">
                   <h4 className="tx-color-01 mg-b-5">Create New Account</h4>
                   <p className="tx-color-03 tx-16 mg-b-40">
-                    It's free to signup and only takes a minute.
+                    Its free to signup and only takes a minute.
                   </p>
                   <div className="form-group">
                     <label>Email address</label>
@@ -158,9 +136,3 @@ export default function HomePage() {
     </>
   );
 }
-
-HomePage.propTypes = {
-  loading: PropTypes.bool,
-  error: PropTypes.object,
-  data: PropTypes.array,
-};

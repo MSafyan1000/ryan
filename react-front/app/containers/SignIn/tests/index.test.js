@@ -13,5 +13,6 @@ describe('<SignIn />', () => {
         </IntlProvider>
       </MockedProvider>,
     );
+    expect(wrapper.find('header')).toHaveLength(1);
   });
 });

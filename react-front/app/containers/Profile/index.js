@@ -5,23 +5,11 @@
  *
  */
 
-import PropTypes from 'prop-types';
-import React from 'react';
-import { useQuery } from '@apollo/react-hooks';
-import { gql } from 'apollo-boost';
-import { FormattedMessage } from 'react-intl';
-import messages from './messages';
 import Header from 'components/Header';
-
+import React from 'react';
 import '../../../THEME/main/assets/css/dashforge.profile.css';
 
 export default function HomePage() {
-  // const props = useQuery(QUERY_ORDERS);
-  // const { loading, error, data } = props;
-
-  // if (loading) return <p>Loading...</p>;
-  // if (error) return <p>Error :(</p>;
-
   return (
     <>
       <Header />
@@ -256,14 +244,14 @@ export default function HomePage() {
                   <p className="mg-b-20">
                     Our team is expanding again. We are looking for a Product
                     Manager and Software Engineer to drive our new aspects of
-                    our capital projects. If you're interested, please drop a
+                    our capital projects. If youre interested, please drop a
                     comment here or simply message me.{' '}
                     <a href="#">#softwareengineer</a>{' '}
                     <a href="#">#engineering</a>
                   </p>
                   <div className="bd bg-gray-50 pd-y-15 pd-x-15 pd-sm-x-20">
                     <h6 className="tx-15 mg-b-3">
-                      We're hiring of Product Manager
+                      Were hiring of Product Manager
                     </h6>
                     <p className="mg-b-0 tx-14">
                       Full-time, $60,000 - $80,000 annual
@@ -808,9 +796,3 @@ export default function HomePage() {
     </>
   );
 }
-
-HomePage.propTypes = {
-  loading: PropTypes.bool,
-  error: PropTypes.object,
-  data: PropTypes.array,
-};

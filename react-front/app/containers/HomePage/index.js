@@ -5,33 +5,11 @@
  *
  */
 
-import PropTypes from 'prop-types';
-import React from 'react';
-import { useQuery } from '@apollo/react-hooks';
-import { gql } from 'apollo-boost';
-import { FormattedMessage } from 'react-intl';
-import messages from './messages';
 import Header from 'components/Header';
-
+import React from 'react';
 import '../../../THEME/main/assets/css/dashforge.landing.css';
 
-export const QUERY_ORDERS = gql`
-  {
-    allOrders {
-      id
-      description
-      total
-    }
-  }
-`;
-
 export default function HomePage() {
-  // const props = useQuery(QUERY_ORDERS);
-  // const { loading, error, data } = props;
-
-  // if (loading) return <p>Loading...</p>;
-  // if (error) return <p>Error :(</p>;
-
   return (
     <>
       <Header />
@@ -146,9 +124,3 @@ export default function HomePage() {
     </>
   );
 }
-
-HomePage.propTypes = {
-  loading: PropTypes.bool,
-  error: PropTypes.object,
-  data: PropTypes.array,
-};

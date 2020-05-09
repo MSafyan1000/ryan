@@ -15,12 +15,10 @@ import { ApolloProvider } from '@apollo/react-hooks';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
 import history from 'utils/history';
-// import 'sanitize.css/sanitize.css';
-// import 'sanitize.css/sanitize.css';
 
-require('../THEME/main/lib/@fortawesome/fontawesome-free/css/all.min.css');
-require('../THEME/main/lib/ionicons/css/ionicons.min.css');
-require('../THEME/main/assets/css/dashforge.min.css');
+import '../THEME/main/lib/@fortawesome/fontawesome-free/css/all.min.css';
+import '../THEME/main/lib/ionicons/css/ionicons.min.css';
+import '../THEME/main/assets/css/dashforge.min.css';
 
 // Import root app
 import App from 'containers/App';
