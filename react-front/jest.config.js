@@ -1,4 +1,5 @@
 module.exports = {
+  modulePathIgnorePatterns: ['<rootDir>/THEME'],
   collectCoverageFrom: [
     'app/**/*.{js,jsx}',
     '!app/**/*.test.{js,jsx}',
@@ -9,10 +10,10 @@ module.exports = {
   ],
   coverageThreshold: {
     global: {
-      statements: 97,
-      branches: 91,
-      functions: 97,
-      lines: 97,
+      statements: 33,
+      branches: 33,
+      functions: 33,
+      lines: 33,
     },
   },
   moduleDirectories: ['node_modules', 'app'],

@@ -78,6 +78,9 @@ module.exports = {
     'redux-saga/no-yield-in-race': 2,
     'redux-saga/yield-effects': 2,
     'require-yield': 0,
+    'jsx-a11y/anchor-is-valid': 0,
+    'react/button-has-type': 0,
+    'jsx-a11y/label-has-associated-control': 0,
   },
   settings: {
     'import/resolver': {
