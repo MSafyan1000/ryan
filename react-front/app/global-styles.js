@@ -1,9 +1,9 @@
 import { createGlobalStyle } from 'styled-components';
 
-require('dashforge/lib/@fortawesome/fontawesome-free/css/all.min.css');
-require('dashforge/lib/ionicons/css/ionicons.min.css');
-require('dashforge/assets/css/dashforge.min.css');
-require('dashforge/assets/css/dashforge.profile.css');
+require('../THEME/main/lib/@fortawesome/fontawesome-free/css/all.min.css');
+require('../THEME/main/lib/ionicons/css/ionicons.min.css');
+require('../THEME/main/assets/css/dashforge.min.css');
+require('../THEME/main/assets/css/dashforge.profile.css');
 
 const GlobalStyle = createGlobalStyle`
   html,

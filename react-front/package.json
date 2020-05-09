@@ -71,7 +71,6 @@
     "compression": "1.7.4",
     "connected-react-router": "6.4.0",
     "cross-env": "5.2.0",
-    "dashforge": "https://github.com/Automation-Consulting-Services/fe_fm",
     "express": "4.16.4",
     "fontfaceobserver": "2.1.0",
     "graphql": "^15.0.0",
