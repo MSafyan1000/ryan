@@ -7,26 +7,24 @@
  *
  */
 
-import React from 'react';
-import { Switch, Route } from 'react-router-dom';
-
 import HomePage from 'containers/HomePage/Loadable';
+import SignUp from 'containers/SignUp/Loadable';
+import SignIn from 'containers/SignIn/Loadable';
+import Profile from 'containers/Profile/Loadable';
+import Go from 'containers/Go/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
-import Header from '../../components/Header';
-import Footer from '../../components/Footer';
-
-import GlobalStyle from '../../global-styles';
+import React from 'react';
+import { Route, Switch } from 'react-router-dom';
 
 export default function App() {
   return (
-    <>
-      <Header />
-      <Switch>
-        <Route exact path="/" component={HomePage} />
-        <Route component={NotFoundPage} />
-      </Switch>
-      <GlobalStyle />
-      <Footer />
-    </>
+    <Switch>
+      <Route exact path="/" component={HomePage} />
+      <Route path="/sign_up" component={SignUp} />
+      <Route path="/sign_in" component={SignIn} />
+      <Route path="/go" component={Go} />
+      <Route path="/profile" component={Profile} />
+      <Route component={NotFoundPage} />
+    </Switch>
   );
 }
