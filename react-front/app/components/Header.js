@@ -1,22 +1,25 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-export default function Header() {
+import NavBarRight from './NavbarRight';
+
+export default function Header(props) {
   return (
     <header className="navbar navbar-header navbar-header-fixed">
       <a href="/" id="mainMenuOpen" className="burger-menu">
         <i data-feather="menu" />
       </a>
       <div className="navbar-brand">
-        <a href="/" className="df-logo">
+        <Link to="/" className="df-logo">
           dash<span>forge</span>
-        </a>
+        </Link>
       </div>
       {/* navbar-brand */}
       <div id="navbarMenu" className="navbar-menu-wrapper">
         <div className="navbar-menu-header">
-          <a href="/" className="df-logo">
+          <Link to="/" className="df-logo">
             dash<span>forge</span>
-          </a>
+          </Link>
           <a id="mainMenuClose" href="/">
             <i data-feather="x" />
           </a>
@@ -40,6 +43,7 @@ export default function Header() {
         </ul>
       </div>
       {/* navbar-menu-wrapper */}
+      {props.isAuthorized && <NavBarRight />}
     </header>
   );
 }

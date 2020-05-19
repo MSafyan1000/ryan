@@ -7,7 +7,13 @@
 
 import Header from 'components/Header';
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 import '../../../THEME/main/assets/css/dashforge.landing.css';
+
+import img1 from '../../images/home-1.png';
+import img2 from '../../images/home-2.png';
+import img3 from '../../images/home-3.png';
 
 export default function HomePage() {
   return (
@@ -26,18 +32,18 @@ export default function HomePage() {
             dashboard design template.
           </h6>
           <div className="d-flex wd-lg-350">
-            <a
-              href="https://themeforest.net/item/dashforge-responsive-admin-dashboard-template/23725961"
+            <Link
+              to="/sign_in"
               className="btn btn-brand-01 btn-uppercase flex-fill"
             >
-              Buy Now - $20
-            </a>
-            <a
-              href="template/classic/dashboard-one.html"
+              Login
+            </Link>
+            <Link
+              to="/sign_up"
               className="btn btn-white btn-uppercase flex-fill mg-l-10"
             >
-              Explore Demo
-            </a>
+              Signup
+            </Link>
           </div>
           <div className="d-flex tx-20 mg-t-40">
             <div className="tx-purple">
@@ -110,13 +116,13 @@ export default function HomePage() {
         </div>
         <div className="home-slider-img">
           <div>
-            <img src="assets/img/home-1.png" alt="" />
+            <img src={img1} alt="" />
           </div>
           <div>
-            <img src="assets/img/home-2.png" alt="" />
+            <img src={img2} alt="" />
           </div>
           <div>
-            <img src="assets/img/home-2.png" alt="" />
+            <img src={img3} alt="" />
           </div>
         </div>
         <div className="home-slider-bg-one" />
