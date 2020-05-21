@@ -6,10 +6,12 @@
  */
 
 import Header from 'components/Header';
+import Footer from 'components/Footer';
 import React from 'react';
 import '../../../THEME/main/assets/css/dashforge.auth.css';
+import { Link, withRouter } from 'react-router-dom';
 
-export default function HomePage() {
+function HomePage(props) {
   return (
     <>
       <div>
@@ -54,9 +56,10 @@ export default function HomePage() {
                   <div className="form-group">
                     <div className="d-flex justify-content-between mg-b-5">
                       <label className="mg-b-0-f">Password</label>
-                      <a href="#" className="tx-13">
+
+                      <Link to="/forgot" className="tx-13">
                         Forgot password?
-                      </a>
+                      </Link>
                     </div>
                     <input
                       type="password"
@@ -64,7 +67,13 @@ export default function HomePage() {
                       placeholder="Enter your password"
                     />
                   </div>
-                  <button className="btn btn-brand-02 btn-block">
+                  <button
+                    className="btn btn-brand-02 btn-block"
+                    onClick={e => {
+                      e.preventDefault();
+                      props.history.push('/go');
+                    }}
+                  >
                     Sign In
                   </button>
                   <div className="divider-text">or</div>
@@ -75,8 +84,8 @@ export default function HomePage() {
                     Sign In With Twitter
                   </button>
                   <div className="tx-13 mg-t-20 tx-center">
-                    Dont have an account?
-                    <a href="page-signup.html">Create an Account</a>
+                    Dont have an account?&nbsp;
+                    <Link to="/sign_up">Create an Account</Link>
                   </div>
                 </div>
               </div>
@@ -87,34 +96,10 @@ export default function HomePage() {
           {/* container */}
         </div>
         {/* content */}
-        <footer className="footer">
-          <div>
-            <span>© 2019 DashForge v1.0.0. </span>
-            <span>
-              Created by <a href="http://themepixels.me">ThemePixels</a>
-            </span>
-          </div>
-          <div>
-            <nav className="nav">
-              <a
-                href="https://themeforest.net/licenses/standard"
-                className="nav-link"
-              >
-                Licenses
-              </a>
-              <a href="../../change-log.html" className="nav-link">
-                Change Log
-              </a>
-              <a
-                href="https://discordapp.com/invite/RYqkVuw"
-                className="nav-link"
-              >
-                Get Help
-              </a>
-            </nav>
-          </div>
-        </footer>
+        <Footer />
       </div>
     </>
   );
 }
+
+export default withRouter(HomePage);

@@ -5,6 +5,7 @@
  *
  */
 
+import Footer from 'components/Footer';
 import Header from 'components/Header';
 import React from 'react';
 import '../../../THEME/main/assets/css/dashforge.profile.css';
@@ -12,7 +13,7 @@ import '../../../THEME/main/assets/css/dashforge.profile.css';
 export default function HomePage() {
   return (
     <>
-      <Header />
+      <Header isAuthorized />
       {/* navbar */}
       <div className="content content-fixed content-profile">
         <div className="container pd-x-0 pd-lg-x-10 pd-xl-x-0">
@@ -766,33 +767,7 @@ export default function HomePage() {
         {/* container */}
       </div>
       {/* content */}
-      <footer className="footer">
-        <div>
-          <span>© 2019 DashForge v1.0.0. </span>
-          <span>
-            Created by <a href="http://themepixels.me">ThemePixels</a>
-          </span>
-        </div>
-        <div>
-          <nav className="nav">
-            <a
-              href="https://themeforest.net/licenses/standard"
-              className="nav-link"
-            >
-              Licenses
-            </a>
-            <a href="../../change-log.html" className="nav-link">
-              Change Log
-            </a>
-            <a
-              href="https://discordapp.com/invite/RYqkVuw"
-              className="nav-link"
-            >
-              Get Help
-            </a>
-          </nav>
-        </div>
-      </footer>
+      <Footer />
     </>
   );
 }

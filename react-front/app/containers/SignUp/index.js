@@ -6,8 +6,10 @@
  */
 
 import Header from 'components/Header';
+import Footer from 'components/Footer';
 import React from 'react';
 import '../../../THEME/main/assets/css/dashforge.auth.css';
+import { Link } from 'react-router-dom';
 
 export default function HomePage() {
   return (
@@ -74,8 +76,7 @@ export default function HomePage() {
                     Sign Up With Twitter
                   </button>
                   <div className="tx-13 mg-t-20 tx-center">
-                    Already have an account?{' '}
-                    <a href="page-signin.html">Sign In</a>
+                    Already have an account? <Link to="/sign_in">Sign In</Link>
                   </div>
                 </div>
               </div>
@@ -105,33 +106,7 @@ export default function HomePage() {
           {/* container */}
         </div>
         {/* content */}
-        <footer className="footer">
-          <div>
-            <span>© 2019 DashForge v1.0.0. </span>
-            <span>
-              Created by <a href="http://themepixels.me">ThemePixels</a>
-            </span>
-          </div>
-          <div>
-            <nav className="nav">
-              <a
-                href="https://themeforest.net/licenses/standard"
-                className="nav-link"
-              >
-                Licenses
-              </a>
-              <a href="../../change-log.html" className="nav-link">
-                Change Log
-              </a>
-              <a
-                href="https://discordapp.com/invite/RYqkVuw"
-                className="nav-link"
-              >
-                Get Help
-              </a>
-            </nav>
-          </div>
-        </footer>
+        <Footer />
       </div>
     </>
   );

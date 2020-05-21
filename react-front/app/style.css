@@ -1,0 +1,7 @@
+.navbar-header {
+  border-bottom: 0;
+}
+
+.navbar-header .navbar-right .dropdown-menu {
+  border-top-width: 1px;
+}

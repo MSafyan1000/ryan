@@ -19,6 +19,7 @@ import history from 'utils/history';
 import '../THEME/main/lib/@fortawesome/fontawesome-free/css/all.min.css';
 import '../THEME/main/lib/ionicons/css/ionicons.min.css';
 import '../THEME/main/assets/css/dashforge.min.css';
+import './style.css';
 
 // Import root app
 import App from 'containers/App';
