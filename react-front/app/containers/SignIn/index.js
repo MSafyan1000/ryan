@@ -10,8 +10,28 @@ import Footer from 'components/Footer';
 import React from 'react';
 import '../../../THEME/main/assets/css/dashforge.auth.css';
 import { Link, withRouter } from 'react-router-dom';
+import { Auth } from 'aws-amplify';
 
 function HomePage(props) {
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
+
+  function validateForm() {
+    return email.length > 0 && password.length > 0;
+  }
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+
+    try {
+      await Auth.signIn(email, password);
+      alert('Logged in');
+    } catch (e) {
+      console.log(e);
+      // alert(e.message);
+    }
+  }
+
   return (
     <>
       <div>
@@ -51,6 +71,8 @@ function HomePage(props) {
                       type="email"
                       className="form-control"
                       placeholder="yourname@yourmail.com"
+                      value={email}
+                      onChange={e => setEmail(e.target.value)}
                     />
                   </div>
                   <div className="form-group">
@@ -65,14 +87,15 @@ function HomePage(props) {
                       type="password"
                       className="form-control"
                       placeholder="Enter your password"
+                      onChange={e => setPassword(e.target.value)}
+                      type="password"
                     />
                   </div>
+
                   <button
                     className="btn btn-brand-02 btn-block"
-                    onClick={e => {
-                      e.preventDefault();
-                      props.history.push('/go');
-                    }}
+                    disabled={!validateForm()}
+                    onClick={handleSubmit}
                   >
                     Sign In
                   </button>

@@ -15,6 +15,8 @@ import { ApolloProvider } from '@apollo/react-hooks';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
 import history from 'utils/history';
+import { Amplify } from 'aws-amplify';
+import config from './config';
 
 import '../THEME/main/lib/@fortawesome/fontawesome-free/css/all.min.css';
 import '../THEME/main/lib/ionicons/css/ionicons.min.css';
@@ -43,6 +45,17 @@ import { translationMessages } from './i18n';
 const initialState = {};
 const store = configureStore(initialState, history);
 const MOUNT_NODE = document.getElementById('app');
+
+console.log(config.cognito);
+Amplify.configure({
+  Auth: {
+    mandatorySignIn: true,
+    region: config.cognito.REGION,
+    userPoolId: config.cognito.USER_POOL_ID,
+    identityPoolId: config.cognito.IDENTITY_POOL_ID,
+    userPoolWebClientId: config.cognito.APP_CLIENT_ID,
+  },
+});
 
 const render = messages => {
   ReactDOM.render(
