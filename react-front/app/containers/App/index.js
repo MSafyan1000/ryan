@@ -19,20 +19,48 @@ import Go from 'containers/Go/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
+import { AppContext } from 'libs/contextLib';
+import { Auth } from 'aws-amplify';
 
 export default function App() {
+  const [isAuthenticated, userHasAuthenticated] = React.useState(false);
+  const [isAuthenticating, setIsAuthenticating] = React.useState(true);
+  React.useEffect(() => {
+    onLoad();
+  }, []);
+
+  async function onLoad() {
+    try {
+      const data = await Auth.currentSession();
+      userHasAuthenticated(true);
+    } catch (e) {
+      if (e !== 'No current user') {
+        alert(e);
+      }
+    }
+
+    setIsAuthenticating(false);
+  }
+
+  console.log(isAuthenticated);
   return (
-    <Switch>
-      <Route exact path="/" component={HomePage} />
-      <Route path="/sign_up" component={SignUp} />
-      <Route path="/sign_in" component={SignIn} />
-      <Route path="/forgot" component={Forgot} />
-      <Route path="/go" component={Go} />
-      <Route path="/profile" component={Profile} />
-      <Route path="/settings" component={Settings} />
-      <Route path="/upgrades" component={Upgrades} />
-      <Route path="/help" component={Help} />
-      <Route component={NotFoundPage} />
-    </Switch>
+    <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated }}>
+      <Switch>
+        <Route exact path="/" component={HomePage} />
+        <Route path="/sign_up" component={SignUp} />
+        <Route path="/sign_in" component={SignIn} />
+        <Route path="/forgot" component={Forgot} />
+        {isAuthenticated && (
+          <>
+            <Route path="/go" component={Go} />
+            <Route path="/profile" component={Profile} />
+            <Route path="/settings" component={Settings} />
+            <Route path="/upgrades" component={Upgrades} />
+            <Route path="/help" component={Help} />
+          </>
+        )}
+        <Route component={NotFoundPage} />
+      </Switch>
+    </AppContext.Provider>
   );
 }

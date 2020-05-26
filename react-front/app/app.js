@@ -46,7 +46,6 @@ const initialState = {};
 const store = configureStore(initialState, history);
 const MOUNT_NODE = document.getElementById('app');
 
-console.log(config.cognito);
 Amplify.configure({
   Auth: {
     mandatorySignIn: true,

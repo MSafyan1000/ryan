@@ -11,8 +11,11 @@ import React from 'react';
 import '../../../THEME/main/assets/css/dashforge.auth.css';
 import { Link, withRouter } from 'react-router-dom';
 import { Auth } from 'aws-amplify';
+import { useAppContext } from 'libs/contextLib';
 
 function HomePage(props) {
+  const { userHasAuthenticated } = useAppContext();
+
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
 
@@ -25,7 +28,8 @@ function HomePage(props) {
 
     try {
       await Auth.signIn(email, password);
-      alert('Logged in');
+      userHasAuthenticated(true);
+      props.history.push('/go');
     } catch (e) {
       console.log(e);
       // alert(e.message);
