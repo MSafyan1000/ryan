@@ -9,9 +9,28 @@ import Header from 'components/Header';
 import Footer from 'components/Footer';
 import React from 'react';
 import '../../../THEME/main/assets/css/dashforge.auth.css';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
+import { Auth } from 'aws-amplify';
 
-export default function HomePage() {
+function HomePage() {
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
+
+  function validateForm() {
+    return email.length > 0 && password.length > 0;
+  }
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+
+    try {
+      await Auth.signUp(email, password);
+      props.history.push('/sign_in');
+    } catch (e) {
+      console.log(e);
+      // alert(e.message);
+    }
+  }
   return (
     <>
       <div>
@@ -32,6 +51,8 @@ export default function HomePage() {
                       type="email"
                       className="form-control"
                       placeholder="Enter your email address"
+                      value={email}
+                      onChange={e => setEmail(e.target.value)}
                     />
                   </div>
                   <div className="form-group">
@@ -39,9 +60,10 @@ export default function HomePage() {
                       <label className="mg-b-0-f">Password</label>
                     </div>
                     <input
-                      type="password"
                       className="form-control"
                       placeholder="Enter your password"
+                      onChange={e => setPassword(e.target.value)}
+                      type="password"
                     />
                   </div>
                   <div className="form-group">
@@ -65,7 +87,11 @@ export default function HomePage() {
                     agree to our terms of service and privacy statement.
                   </div>
                   {/* form-group */}
-                  <button className="btn btn-brand-02 btn-block">
+                  <button
+                    className="btn btn-brand-02 btn-block"
+                    disabled={!validateForm()}
+                    onClick={handleSubmit}
+                  >
                     Create Account
                   </button>
                   <div className="divider-text">or</div>
@@ -111,3 +137,5 @@ export default function HomePage() {
     </>
   );
 }
+
+export default withRouter(HomePage);

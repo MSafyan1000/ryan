@@ -88,7 +88,6 @@ function HomePage(props) {
                       </Link>
                     </div>
                     <input
-                      type="password"
                       className="form-control"
                       placeholder="Enter your password"
                       onChange={e => setPassword(e.target.value)}
