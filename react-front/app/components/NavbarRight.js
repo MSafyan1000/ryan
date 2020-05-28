@@ -1,10 +1,22 @@
 import React from 'react';
 
 import logo from '../images/img1.png';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
+import { useAppContext } from 'libs/contextLib';
+import { Auth } from 'aws-amplify';
 
-function index() {
+function index(props) {
+  const { userHasAuthenticated, isAuthenticated } = useAppContext();
+
   const [visible, setVisible] = React.useState(false);
+
+  async function handleLogout(e) {
+    e.preventDefault();
+    await Auth.signOut();
+
+    userHasAuthenticated(false);
+    props.history.push('/');
+  }
 
   return (
     <div className="navbar-right">
@@ -47,13 +59,13 @@ function index() {
             <i data-feather="settings" /> Profile
           </Link>
           <div className="dropdown-divider" />
-          <Link to="/" className="dropdown-item">
+          <a href="#" className="dropdown-item" onClick={handleLogout}>
             <i data-feather="log-out" /> Sign Out
-          </Link>
+          </a>
         </div>
       </div>
     </div>
   );
 }
 
-export default index;
+export default withRouter(index);
