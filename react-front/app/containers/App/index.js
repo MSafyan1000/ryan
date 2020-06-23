@@ -22,11 +22,16 @@ import { Route, Switch } from 'react-router-dom';
 import { AppContext } from 'libs/contextLib';
 import { Auth } from 'aws-amplify';
 
+// import 'materialize-css/dist/css/materialize.min.css';
+// import M from 'materialize-css/dist/js/materialize.min.js';
+
 export default function App() {
   const [isAuthenticated, userHasAuthenticated] = React.useState(false);
   const [isAuthenticating, setIsAuthenticating] = React.useState(true);
   React.useEffect(() => {
     onLoad();
+    //init Materialize-css
+    // M.AutoInit();
   }, []);
 
   async function onLoad() {

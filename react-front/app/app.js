@@ -9,7 +9,7 @@
 import '@babel/polyfill';
 
 // Import all the third party stuff
-import React from 'react';
+import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { ApolloProvider } from '@apollo/react-hooks';
 import { Provider } from 'react-redux';
@@ -17,6 +17,7 @@ import { ConnectedRouter } from 'connected-react-router';
 import history from 'utils/history';
 import { Amplify } from 'aws-amplify';
 import config from './config';
+//Materialize-css
 
 import '../THEME/main/lib/@fortawesome/fontawesome-free/css/all.min.css';
 import '../THEME/main/lib/ionicons/css/ionicons.min.css';

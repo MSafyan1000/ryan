@@ -143,8 +143,8 @@ export default function HomePage() {
             className="btn btn-brand-02 btn-block"
             data-testid="submitButton"
             isLoading={isConfirming}
-            disabled={!validateResetForm()}
-            // onClick={handleSubmit}
+            // disabled={!validateResetForm}
+            onClick={handleConfirmClick}
           >
             Confirm
           </button>

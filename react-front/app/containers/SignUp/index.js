@@ -13,14 +13,18 @@ import React, { useState, useEffect } from 'react';
 import '../../../THEME/main/assets/css/dashforge.auth.css';
 import { Link, withRouter } from 'react-router-dom';
 import { Auth } from 'aws-amplify';
+import { Snackbar } from '@material-ui/core';
+import IconButton from '@material-ui/core/IconButton';
 
 // import SignUpForm from './signUpForm';
 
-function HomePage() {
+function HomePage(props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmationCode, setConfirmationCode] = useState('');
   const [signedUp, setSignedUp] = useState(false);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMsg, setSnackbarMsg] = useState('');
 
   useEffect(() => {}, [signedUp]);
 
@@ -28,6 +32,9 @@ function HomePage() {
     return email.length > 0 && password.length > 0;
   }
 
+  function snackbarClose(e) {
+    setSnackbarOpen(false);
+  }
   async function handleSubmit(event) {
     event.preventDefault();
     if (!signedUp) {
@@ -36,21 +43,27 @@ function HomePage() {
         setSignedUp(true);
         props.history.push('/sign_up');
       } catch (e) {
-        console.log(e);
+        console.table(['from singup if block ', e]);
+        setSnackbarOpen(true);
+        setSnackbarMsg(e.message);
         if (e.message && e.name === 'UserNotConfirmedException') {
           setSignedUp(true);
           console.log('from signedUp error');
         }
-        alert(e.message);
+        // M.toast({ html: e.message });
       }
     } else {
       try {
         await Auth.confirmSignUp(email, confirmationCode);
         console.log('auth confirmCode');
+        setSnackbarOpen(true);
+        setSnackbarMsg('You are Logged In....');
         props.history.push('/profile');
       } catch (e) {
         console.log(e);
-        alert(e.message);
+        // alert(e.message);
+        setSnackbarOpen(true);
+        setSnackbarMsg(e.message);
       }
     }
   }
@@ -60,6 +73,23 @@ function HomePage() {
         <Header />
         {/* navbar */}
         {/* {console.table('code', confirmationCode, 'email', email, password)} */}
+        <Snackbar
+          anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+          open={snackbarOpen}
+          autoHideDuration={3000}
+          onClose={snackbarClose}
+          message={<span id="message-id">{snackbarMsg}</span>}
+          action={[
+            <IconButton
+              key="close"
+              arial-label="Close"
+              color="inherit"
+              onClick={snackbarClose}
+            >
+              X
+            </IconButton>,
+          ]}
+        />
         <div className="content content-fixed content-auth">
           <div className="container">
             <div className="media align-items-stretch justify-content-center ht-100p">

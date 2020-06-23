@@ -13,7 +13,9 @@
         },
         "categories": {
             "auth": {
-                "reactfront631a15b3": {}
+                "reactfront631a15b3": {
+                    "hostedUIProviderCreds": "[{\"ProviderName\":\"Facebook\",\"client_id\":\"567058724003592\",\"client_secret\":\"8f8720be1142272bbeb0e4460136e25e\"},{\"ProviderName\":\"Google\",\"client_id\":\"554461416227-ptcloc431kv5tcp64kokknh0189imuaq.apps.googleusercontent.com\",\"client_secret\":\"MGQhqq3FfNdB1kBZqpGuI6WL\"}]"
+                }
             }
         }
     }

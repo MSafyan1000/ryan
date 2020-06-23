@@ -12,6 +12,8 @@ import '../../../THEME/main/assets/css/dashforge.auth.css';
 import { Link, withRouter } from 'react-router-dom';
 import { Auth } from 'aws-amplify';
 import { useAppContext } from 'libs/contextLib';
+import { Snackbar } from '@material-ui/core';
+import IconButton from '@material-ui/core/IconButton';
 
 function HomePage(props) {
   const { userHasAuthenticated } = useAppContext();
@@ -20,24 +22,33 @@ function HomePage(props) {
   const [password, setPassword] = React.useState('');
   const [signingUp, setSigningUp] = useState(false);
   const [confirmationCode, setConfirmationCode] = useState('');
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMsg, setSnackbarMsg] = useState('');
 
   function validateForm() {
     return email.length > 0 && password.length > 0;
   }
-
+  function snackbarClose(e) {
+    setSnackbarOpen(false);
+  }
   async function handleSubmit(event) {
     event.preventDefault();
 
     try {
       await Auth.signIn(email, password);
       userHasAuthenticated(true);
+
+      setSnackbarOpen(true);
+      setSnackbarMsg('You are Logged In');
+
       props.history.push('/go');
     } catch (e) {
       if (e.message && e.name === 'UserNotConfirmedException') {
         // setSigningUp(true);
-        console.log('from signIn error');
+        console.table(['signIn', e]);
       }
-      alert(e.message);
+      setSnackbarOpen(true);
+      setSnackbarMsg(e.message);
     }
   }
 
@@ -45,8 +56,25 @@ function HomePage(props) {
     <>
       <div>
         <Header />
-        {/* {console.table('signinUp', signingUp, 'email', email, password)} */}
+        {console.table('snackbarOPen', snackbarOpen, 'msg', snackbarMsg)}
         {/* navbar */}
+        <Snackbar
+          anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+          open={snackbarOpen}
+          autoHideDuration={3000}
+          onClose={snackbarClose}
+          message={<span id="message-id">{snackbarMsg}</span>}
+          action={[
+            <IconButton
+              key="close"
+              arial-label="Close"
+              color="inherit"
+              onClick={snackbarClose}
+            >
+              X
+            </IconButton>,
+          ]}
+        />
         <div className="content content-fixed content-auth">
           <div className="container">
             <div className="media align-items-stretch justify-content-center ht-100p pos-relative">
