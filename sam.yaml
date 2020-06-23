@@ -1,0 +1,106 @@
+AWSTemplateFormatVersion: 2010-09-09
+Transform: AWS::Serverless-2016-10-31
+Description: This application creates a static website for react boilerplate
+Metadata:
+  AWS::ServerlessRepo::Application:
+    Name: ryan
+    Description: This application creates a static website that interacts with the
+      backend service.
+    Author: AWS Serverless Application Repository
+    SpdxLicenseId: Apache-2.0
+    Labels:
+    - github
+    - serverless
+    - sam
+    HomePageUrl: https://github.com/awslabs/realworld-serverless-application
+    SemanticVersion: 1.0.0
+Parameters:
+  Stage:
+    Type: String
+    Description: The stage where the application is running in, e.g., dev, prod.
+    Default: test
+Resources:
+  amplify:
+    Type: AWS::S3::Bucket
+    Properties:
+      WebsiteConfiguration:
+        IndexDocument: index.html
+  DeploymentLayer:
+    Type: AWS::Serverless::Application
+    Properties:
+      Location:
+        ApplicationId: arn:aws:serverlessrepo:us-east-1:375983427419:applications/deploy-to-s3
+        SemanticVersion: 2.2.0
+  DeploymentFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Layers:
+      - Fn::GetAtt:
+        - DeploymentLayer
+        - Outputs.Arn
+      CodeUri: s3://templatesafyan/8f6ed48d498ec4233ce94236f6d45223
+      AutoPublishAlias: live
+      Runtime: python3.6
+      Handler: deployer.resource_handler
+      Timeout: 600
+      Policies:
+      - S3CrudPolicy:
+          BucketName:
+            Ref: amplify
+  DeploymentResource:
+    Type: AWS::CloudFormation::CustomResource
+    Properties:
+      ServiceToken:
+        Fn::GetAtt:
+        - DeploymentFunction
+        - Arn
+      Version:
+        Ref: DeploymentFunction.Version
+      TargetBucket:
+        Ref: amplify
+      Substitutions:
+        FilePattern: '*.js*'
+        Values:
+          SAR_BACKEND_ENDPOINT:
+            Fn::Sub: '{{resolve:ssm:/applications/apprepo/${Stage}/apigateway/ApplicationsApi/Endpoint:1}}/Prod'
+          USER_POOL_ID:
+            Fn::Sub: '{{resolve:ssm:/applications/apprepo/${Stage}/cognito/userpool/ApplicationsApi/Id:1}}'
+          USER_POOL_WEB_CLIENT_ID:
+            Ref: CognitoClient
+      Acl: public-read
+      CacheControlMaxAge: 600
+  CognitoClient:
+    Type: AWS::Cognito::UserPoolClient
+    Properties:
+      ClientName: static-website
+      GenerateSecret: false
+      RefreshTokenValidity: 30
+      UserPoolId:
+        Fn::Sub: '{{resolve:ssm:/applications/apprepo/${Stage}/cognito/userpool/ApplicationsApi/Id:1}}'
+  WebsiteBucketName:
+    Type: AWS::SSM::Parameter
+    Properties:
+      Name:
+        Fn::Sub: /applications/apprepo/${Stage}/s3/amplify/Name
+      Type: String
+      Value:
+        Ref: amplify
+      Description: amplify bucket name
+  WebsiteUrl:
+    Type: AWS::SSM::Parameter
+    Properties:
+      Name:
+        Fn::Sub: /applications/apprepo/${Stage}/s3/amplify/WebsiteURL
+      Type: String
+      Value:
+        Fn::GetAtt:
+        - amplify
+        - WebsiteURL
+      Description: amplify website URL
+Outputs:
+  Url:
+    Description: The static website URL for the service.
+    Value:
+      Fn::GetAtt:
+      - amplify
+      - WebsiteURL

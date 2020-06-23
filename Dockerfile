@@ -7,10 +7,11 @@ WORKDIR /myapp
 
 COPY Gemfile /myapp/Gemfile
 COPY Gemfile.lock /myapp/Gemfile.lock
+COPY /react-front/package*json /myapp/react-front/
 
 RUN gem install foreman && \
   bundle install && \
-  yarn install --cwd react-front
+  npm install --prefix react-front
 
 COPY . /myapp
 

@@ -1,0 +1,126 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`react testing vs Enzyme Enzyme snapshot SignUp 1`] = `
+<form
+  data-testid="form"
+  onSubmit={[Function]}
+>
+  <div
+    className="pd-t-20 wd-100p"
+  >
+    <h4
+      className="tx-color-01 mg-b-5"
+    >
+      Create New Account
+    </h4>
+    <p
+      className="tx-color-03 tx-16 mg-b-40"
+    >
+      Its free to signup and only takes a minute.
+    </p>
+    <div
+      className="form-group"
+    >
+      <label>
+        Email address
+      </label>
+      <input
+        className="form-control"
+        data-testid="inputEmail"
+        onChange={[Function]}
+        placeholder="Enter your email address"
+        type="email"
+        value=""
+      />
+    </div>
+    <div
+      className="form-group"
+    >
+      <div
+        className="d-flex justify-content-between mg-b-5"
+      >
+        <label
+          className="mg-b-0-f"
+        >
+          Password
+        </label>
+      </div>
+      <input
+        className="form-control"
+        data-testid="inputPassword"
+        placeholder="Enter your password"
+        type="password"
+      />
+    </div>
+    <div
+      className="form-group"
+    >
+      <label>
+        Firstname
+      </label>
+      <input
+        className="form-control"
+        data-testid="inputFirstName"
+        placeholder="Enter your firstname"
+        type="text"
+      />
+    </div>
+    <div
+      className="form-group"
+    >
+      <label>
+        Lastname
+      </label>
+      <input
+        className="form-control"
+        data-testid="inputLastName"
+        placeholder="Enter your lastname"
+        type="text"
+      />
+    </div>
+    <div
+      className="form-group tx-12"
+    >
+      By clicking 
+      <strong>
+        Create an account
+      </strong>
+       below, you agree to our terms of service and privacy statement.
+    </div>
+    <button
+      className="btn btn-brand-02 btn-block"
+      data-testid="submitButton"
+      disabled={true}
+      onClick={[Function]}
+    >
+      Create Account
+    </button>
+    <div
+      className="divider-text"
+    >
+      or
+    </div>
+    <button
+      className="btn btn-outline-facebook btn-block"
+    >
+      Sign Up With Facebook
+    </button>
+    <button
+      className="btn btn-outline-twitter btn-block"
+    >
+      Sign Up With Twitter
+    </button>
+    <div
+      className="tx-13 mg-t-20 tx-center"
+    >
+      Already have an account? 
+      <a
+        href="/sign_in"
+        onClick={[Function]}
+      >
+        Sign In
+      </a>
+    </div>
+  </div>
+</form>
+`;

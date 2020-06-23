@@ -1,0 +1,20 @@
+{
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-reactfront-dev-143845-authRole",
+            "UnauthRoleArn": "arn:aws:iam::227551009446:role/amplify-reactfront-dev-143845-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::227551009446:role/amplify-reactfront-dev-143845-authRole",
+            "Region": "ap-south-1",
+            "DeploymentBucketName": "amplify-reactfront-dev-143845-deployment",
+            "UnauthRoleName": "amplify-reactfront-dev-143845-unauthRole",
+            "StackName": "amplify-reactfront-dev-143845",
+            "StackId": "arn:aws:cloudformation:ap-south-1:227551009446:stack/amplify-reactfront-dev-143845/b35491a0-ad59-11ea-8f92-0aa78e4848ba",
+            "AmplifyAppId": "d3emjwoojp2hf5"
+        },
+        "categories": {
+            "auth": {
+                "reactfront631a15b3": {}
+            }
+        }
+    }
+}
